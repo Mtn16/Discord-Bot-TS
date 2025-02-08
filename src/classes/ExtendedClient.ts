@@ -28,6 +28,7 @@ export default class ExtendedClient extends Client {
 
      constructor(config: Config) {
           super({ intents: config.intents})
+          extendedClient = this;
           this.config = config
 
           this.slashCommands = new Map()
@@ -73,9 +74,15 @@ export default class ExtendedClient extends Client {
           })
 
           this.on("interactionCreate", async (interaction) => {
-               await this.interactionManager.handle(interaction, this);
+               await this.interactionManager.handle(interaction);
           })
 
           this.login(this.config.token)
      }
+}
+
+let extendedClient: ExtendedClient
+
+export function getExtendedClient(): ExtendedClient {
+     return extendedClient
 }
