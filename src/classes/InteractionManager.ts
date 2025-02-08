@@ -9,7 +9,6 @@ import RoleSelectMenuManager from "./RoleSelectMenuManager";
 import ChannelSelectMenuManager from "./ChannelSelectMenuManager";
 import MentionableSelectMenuManager from "./MentionableSelectMenuManager";
 import ModalManager from "./ModalManager";
-import ExtendedClient from "./ExtendedClient";
 
 export default class InteractionManager {
      slashCommandManager: SlashCommandManager
@@ -32,15 +31,15 @@ export default class InteractionManager {
           })
      }
 
-     async handle(interaction: Interaction, client: ExtendedClient) {
+     async handle(interaction: Interaction) {
           if(interaction.isChatInputCommand()) {
-               await this.slashCommandManager.handleCommand(interaction, client);
+               await this.slashCommandManager.handleCommand(interaction);
           } else if(interaction.isAutocomplete()) {
-               await this.slashCommandManager.handleAutocomplete(interaction, client);
+               await this.slashCommandManager.handleAutocomplete(interaction);
           } else if(interaction.isButton()) {
-               await this.buttonManager.handleButton(interaction, client)
+               await this.buttonManager.handleButton(interaction)
           } else if(interaction.isAnySelectMenu()) {
-               await this.selectMenuManager.handleSelectMenu(interaction, client)
+               await this.selectMenuManager.handleSelectMenu(interaction)
           }
      }
 }
