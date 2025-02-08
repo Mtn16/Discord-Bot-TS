@@ -73,7 +73,7 @@ export default class ExtendedClient extends Client {
           })
 
           this.on("interactionCreate", async (interaction) => {
-               await this.interactionManager.handle(interaction);
+               await this.interactionManager.handle(interaction, this);
           })
 
           this.login(this.config.token)
