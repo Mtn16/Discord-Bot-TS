@@ -27,7 +27,7 @@ export default class ContextMenuCommandManager {
           }
 
           for (const file of this.userCommandFiles) {
-               const command: ContextMenuCommand = (await import(`../commands/contextMenuCommands/user/${file}`)).default
+               const command: ContextMenuCommand = new (await import(`../commands/contextMenuCommands/user/${file}`)).default()
      
                if(command && command.data) {
                     this.restCommands.push(command.data.toJSON())
